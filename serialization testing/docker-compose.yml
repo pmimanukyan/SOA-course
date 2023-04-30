@@ -1,0 +1,78 @@
+version: "3.9"
+
+services:
+
+  proxy:
+    container_name: proxy
+    build:
+      dockerfile: proxy/Dockerfile
+      context: .
+    ports:
+      - "2000:2000/udp"
+    networks:
+      - soa
+    environment:
+      - MULTICAST_GROUP
+
+  native:
+    container_name: native
+    build:
+      dockerfile: native/Dockerfile
+      context: .
+    networks:
+      - soa
+    environment:
+      - MULTICAST_GROUP
+
+  json:
+    container_name: json
+    build:
+      dockerfile: json/Dockerfile
+      context: . 
+    networks:
+      - soa
+    environment:
+      - MULTICAST_GROUP
+
+  xml:
+    container_name: xml
+    build:
+      dockerfile: xml/Dockerfile
+      context: . 
+    networks:
+      - soa
+    environment:
+      - MULTICAST_GROUP
+
+  yaml:
+    container_name: yaml
+    build:
+      dockerfile: yaml/Dockerfile
+      context: . 
+    networks:
+      - soa
+    environment:
+      - MULTICAST_GROUP
+
+  messagepack:
+    container_name: messagepack
+    build:
+      dockerfile: messagepack/Dockerfile
+      context: . 
+    networks:
+      - soa
+    environment:
+      - MULTICAST_GROUP
+  
+  apache_avro:
+    container_name: apache_avro
+    build:
+      dockerfile: apache_avro/Dockerfile
+      context: . 
+    networks:
+      - soa
+    environment:
+      - MULTICAST_GROUP
+
+networks:
+  soa:
